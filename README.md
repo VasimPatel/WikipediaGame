@@ -3,6 +3,7 @@ AI using Standord NLP GloVe that plays the Wikipedia game.
 Given a Wikipedia entry, reach another Wikipedia entry by clicking Wikipedia links.
 
 Word similarity using: https://nlp.stanford.edu/projects/glove/
+Download training set from http://nlp.stanford.edu/data/glove.6B.zip and extract to wiki-data/
 
 Run using Python 3:
 python main.py SOURCE DEST
