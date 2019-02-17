@@ -20,7 +20,7 @@ def analyze(links, source):
             inner_sum = 0
             for l in filtered_link:
                 inner_sum = 0
-                inner_sum += similar_word_calc.get_distance(s, l)
+                inner_sum += similar_word_calc.get_distance(s.lower(), l.lower())
             outer_sum += inner_sum/len(filtered_link)
         pq.put(link, outer_sum/len(filtered_source))
     
