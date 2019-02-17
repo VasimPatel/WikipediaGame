@@ -8,7 +8,7 @@ seen = []
 
 def findRoute(source, dest):
     curr = "https://en.wikipedia.org/wiki/"+ source
-    order = []
+    order = [source]
     print(curr)
     while (True):
         unseen_links = []
@@ -19,7 +19,7 @@ def findRoute(source, dest):
             if link not in seen:
                 unseen_links.append(link)
         if not unseen_links:
-            if curr == source:
+            if curr.lower() == source.lower():
                 print("Impossible to get there")
                 sys.exit()
             if curr in order:
@@ -32,7 +32,7 @@ def findRoute(source, dest):
         order.append(step)
         curr = "https://en.wikipedia.org/wiki/" + step
         print(curr)
-        if step == dest:
+        if step.lower() == dest.lower():
             print(order)
             sys.exit()
 
