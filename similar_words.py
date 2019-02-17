@@ -1,4 +1,5 @@
 import numpy
+import sys
 from scipy.spatial import distance
 
 
@@ -25,6 +26,9 @@ class SimilarWords:
         file.close()
 
     def get_distance(self, w1, w2):
+        if (w1 not in self.embedding_dict or \
+                w2 not in self.embedding_dict):
+            return sys.float_info.max
         return distance.euclidean(self.embedding_dict[w1], 
                                   self.embedding_dict[w2])
 
