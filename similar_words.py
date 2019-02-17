@@ -25,6 +25,6 @@ class SimilarWords:
         file.close()
 
     def get_distance(self, w1, w2):
-        return distance.euclidean(self.embedding_dict[w1],
+        return distance.euclidean(self.embedding_dict[w1], 
                                   self.embedding_dict[w2])
 

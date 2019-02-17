@@ -12,7 +12,7 @@ def findRoute(source, dest):
     while (True):
         print(curr)
         pageLinks = linkGrab.get_links(curr)
-        bestLinks = analyzer.analyze(list(pageLinks))
+        bestLinks = analyzer.analyze(list(pageLinks), source)
         #step = list(set(bestLinks) - set(seen))[0]
         step = bestLinks[0]
         seen.append(step)
