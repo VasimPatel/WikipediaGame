@@ -1,0 +1,5 @@
+https://en.wikipedia.org/wiki/RIT
+https://en.wikipedia.org/wiki/Josef_Albers
+https://en.wikipedia.org/wiki/Nazism
+https://en.wikipedia.org/wiki/Adolf_Hitler
+['Josef_Albers', 'Nazism', 'Adolf_Hitler']

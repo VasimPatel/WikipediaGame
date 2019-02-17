@@ -9,19 +9,32 @@ seen = []
 def findRoute(source, dest):
     curr = "https://en.wikipedia.org/wiki/"+ source
     order = []
+    print(curr)
     while (True):
-        print(curr)
+        unseen_links = []
+
+        #grab all links in page, and save the ones we have not been to already
         pageLinks = linkGrab.get_links(curr)
-        bestLinks = analyzer.analyze(list(pageLinks), source)
-        #step = list(set(bestLinks) - set(seen))[0]
+        for link in pageLinks:
+            if link not in seen:
+                unseen_links.append(link)
+        if not unseen_links:
+            if curr == source:
+                print("Impossible to get there")
+                sys.exit()
+            if curr in order:
+                order.remove(curr)
+            curr = order[-1]
+            continue
+        bestLinks = analyzer.analyze(list(unseen_links), dest)
         step = bestLinks[0]
         seen.append(step)
         order.append(step)
         curr = "https://en.wikipedia.org/wiki/" + step
         print(curr)
-        if step == source:
+        if step == dest:
             print(order)
-            exit(0)
+            sys.exit()
 
 
 if __name__ == "__main__":
