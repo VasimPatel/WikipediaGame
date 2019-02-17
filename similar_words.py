@@ -4,6 +4,7 @@ from scipy.spatial import distance
 
 
 class SimilarWords:
+    """ Determines similarity between 2 words using GloVe """
 
     embedding_dict = dict()
     file_name = ""
@@ -25,10 +26,11 @@ class SimilarWords:
             self.embedding_dict[word] = word_vec
         file.close()
 
-    def get_distance(self, w1, w2):
-        if (w1 not in self.embedding_dict or \
-                w2 not in self.embedding_dict):
+    def get_distance(self, word_0, word_1):
+        """ Calculates Euclidean distance between two words based on GloVe
+        vector """
+        if (word_0 not in self.embedding_dict or \
+                word_1 not in self.embedding_dict):
             return sys.float_info.max
-        return distance.euclidean(self.embedding_dict[w1], 
-                                  self.embedding_dict[w2])
-
+        return distance.euclidean(self.embedding_dict[word_0],
+                                  self.embedding_dict[word_1])

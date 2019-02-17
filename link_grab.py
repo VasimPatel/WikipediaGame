@@ -13,8 +13,7 @@ def get_links(source_url):
 
     for link in link_exp.findall(page_html):
         links.add(link[7:-1])
-    links.discard(mp)               
-    
-    return links    #returns a set of all links from a page except the link to the main page
+    links.discard(mp)
 
-
+    # returns a set of all links from a page except the link to the main page
+    return links

@@ -1,41 +1,44 @@
 import sys
-import linkGrab
+import link_grab
 import analyzer
 
-source = "https://en.wikipedia.org/wiki/Penis"
+SEEN = []
 
-seen = []
+def find_route(source, dest):
+    """ Find path from source to dest via Wikipedia links """
 
-def findRoute(source, dest):
-    curr = "https://en.wikipedia.org/wiki/"+ source
-    order = [source]
+    curr = "https://en.wikipedia.org/wiki/" + source
+    order = [source]        # links traversed
     print(curr)
-    while (True):
+
+    while True:
         unseen_links = []
 
-        #grab all links in page, and save the ones we have not been to already
-        pageLinks = linkGrab.get_links(curr)
-        for link in pageLinks:
-            if link not in seen:
+        # Grab all links in page
+        page_links = link_grab.get_links(curr)
+        for link in page_links:
+            # Ensures no cycles
+            if link not in SEEN:
+                # only store links that have not been visited
                 unseen_links.append(link)
-        if not unseen_links:
-            if curr.lower() == source.lower():
-                print("Impossible to get there")
+        # Ensures the program does not get stuck
+        if not unseen_links:    # all links on page have been visited
+            if curr.lower() == source.lower():  # have tracked back to source
+                print("Impossible to get there")    # no source to dest path
                 sys.exit()
             if curr in order:
                 order.remove(curr)
-            curr = order[-1]
+            curr = order[-1]        # this link was a bad choice, move back
             continue
-        bestLinks = analyzer.analyze(list(unseen_links), dest)
-        step = bestLinks[0]
-        seen.append(step)
+        best_links = analyzer.analyze(list(unseen_links), dest)
+        step = best_links[0]
+        SEEN.append(step)
         order.append(step)
         curr = "https://en.wikipedia.org/wiki/" + step
         print(curr)
-        if step.lower() == dest.lower():
+        if step.lower() == dest.lower():    # destination reached
             print(order)
             sys.exit()
 
-
 if __name__ == "__main__":
-    findRoute(sys.argv[1], sys.argv[2])
+    find_route(sys.argv[1], sys.argv[2])
