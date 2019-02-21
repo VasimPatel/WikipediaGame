@@ -6,7 +6,6 @@ SEEN = []
 
 def find_route(source, dest):
     """ Find path from source to dest via Wikipedia links """
-
     curr = "https://en.wikipedia.org/wiki/" + source
     order = [source]        # links traversed
     print(curr)
@@ -38,7 +37,14 @@ def find_route(source, dest):
         print(curr)
         if step.lower() == dest.lower():    # destination reached
             print(order)
-            sys.exit()
+            break
 
 if __name__ == "__main__":
     find_route(sys.argv[1], sys.argv[2])
+    
+    # Allow users to play continuously
+    while (True):
+        SEEN = []
+        source_dest = (input("Enter next source and destination (space separated) or CTRL+D to exit: ")).split(" ")
+        find_route(source_dest[0], source_dest[1])
+
